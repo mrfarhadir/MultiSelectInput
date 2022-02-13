@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {MultiSelectInput} from "./Input";
 
 export const Wrapper = styled.div`
   background: var(--light);
@@ -10,7 +11,7 @@ export const Wrapper = styled.div`
 export const MultiSelect = () => {
 	return (
 		<Wrapper>
-			<input />
+			<MultiSelectInput />
 		</Wrapper>
 	)
 }
