@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import {CloseIcon} from "../icons/Close";
 
 const Tag = styled.span`
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
   height: 32px;
   padding: 0 12px;
   background: var(--background);
@@ -10,17 +13,30 @@ const Tag = styled.span`
   line-height: 2.1;
   font-size: 14px;
   font-weight: bold;
+  & > *:last-child {
+    margin-left: 12px;
+  }
 `
 
+const TagButton = (props: { children: string }) => {
+	return (
+		<Tag>
+			{props.children}
+			<CloseIcon/>
+		</Tag>
+	)
+}
+
 const TagsWrapper = styled.div`
-	display: inline-block;
+  display: inline-block;
+  cursor: pointer;
 `
 
 export const Tags = () => {
 	return (
 		<TagsWrapper>
-			<Tag>React</Tag>
-			<Tag>VueJs</Tag>
+			<TagButton>React</TagButton>
+			<TagButton>VueJs</TagButton>
 		</TagsWrapper>
 	)
 }
