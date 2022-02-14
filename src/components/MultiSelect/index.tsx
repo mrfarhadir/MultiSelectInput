@@ -18,15 +18,22 @@ export const Wrapper = styled.div`
 
 
 export const MultiSelect = () => {
-
+	const wrapper = useRef<HTMLDivElement>(null)
 	const [items, setItems] = useState<Array<string>>([])
+	
+	function scrollWrapperToEnd() {
+		if (wrapper.current) {
+			wrapper.current.scrollLeft = wrapper.current.scrollWidth
+		}
+	}
 
 	function addNewTag(tagName: string) {
 		setItems([...items, tagName]);
+		scrollWrapperToEnd()
 	}
 
 	return (
-		<Wrapper>
+		<Wrapper ref={wrapper}>
 			<div>
 				<Tags items={items} />
 				<MultiSelectInput newTagAdded={tagName => addNewTag(tagName)} />
