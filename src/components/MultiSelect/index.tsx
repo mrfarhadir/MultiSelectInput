@@ -2,6 +2,7 @@ import { useRef } from "react";
 import styled from "styled-components";
 import {MultiSelectInput} from "./Input";
 import { Tags } from "./Tags";
+import {useState} from "react";
 
 export const Wrapper = styled.div`
   background: var(--light);
@@ -17,13 +18,18 @@ export const Wrapper = styled.div`
 
 
 export const MultiSelect = () => {
-	const tagsRef = useRef<React.FC>(null)
-	const items: Array<string> = ['React', 'Angular', 'Vuejs', 'Nuxtjs', 'Nextjs', 'TypeScript']
+
+	const [items, setItems] = useState<Array<string>>([])
+
+	function addNewTag(tagName: string) {
+		setItems([...items, tagName]);
+	}
+
 	return (
 		<Wrapper>
 			<div>
 				<Tags items={items} />
-				<MultiSelectInput />
+				<MultiSelectInput newTagAdded={tagName => addNewTag(tagName)} />
 			</div>
 		</Wrapper>
 	)

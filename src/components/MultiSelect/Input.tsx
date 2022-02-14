@@ -20,6 +20,18 @@ const Input = styled.input`
   }
 `
 
-export const MultiSelectInput = () => {
-	return (<Input type={'text'} placeholder={'Add Tag'}/>)
+
+export const MultiSelectInput = (props: {
+	newTagAdded: (tagName: string) => void
+}) => {
+
+
+	function inputOnKeyup(e: React.KeyboardEvent<HTMLInputElement>) {
+		if (e.key === 'Enter') {
+			props.newTagAdded(e.currentTarget.value)
+			e.currentTarget.value = ''
+		}
+	}
+
+	return (<Input onKeyUp={e => inputOnKeyup(e)} type={'text'} placeholder={'Add Tag'}/>)
 }
