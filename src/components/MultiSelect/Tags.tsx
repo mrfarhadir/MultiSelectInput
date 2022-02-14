@@ -32,11 +32,16 @@ const TagsWrapper = styled.div`
   cursor: pointer;
 `
 
-export const Tags = () => {
+function renderTags(items: Array<string>) {
+	return items.map((item, i) => <TagButton key={i}>{item}</TagButton>)
+}
+
+export const Tags = (props: {
+	items: Array<string>
+}) => {
 	return (
 		<TagsWrapper>
-			<TagButton>React</TagButton>
-			<TagButton>VueJs</TagButton>
+			{renderTags(props.items)}
 		</TagsWrapper>
 	)
 }
