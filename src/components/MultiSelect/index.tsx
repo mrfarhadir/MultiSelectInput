@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   border-radius: 12px;
   display: flex;
   align-items: center;
+  padding-left: 4px;
 `
 
 
