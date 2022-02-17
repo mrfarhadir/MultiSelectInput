@@ -1,10 +1,15 @@
 import styled from "styled-components";
+import { AutoCompleteList } from "./AutoCompleteList";
+
+const Wrapper = styled.div`
+  position: relative;
+`
 
 const Input = styled.input`
   height: 48px;
   border-radius: 12px;
   border: none;
-  width: 320px;
+  width: 216px;
   padding: 0 16px;
   &:focus {
     outline: none;
@@ -20,7 +25,6 @@ const Input = styled.input`
   }
 `
 
-
 export const MultiSelectInput = (props: {
 	newTagAdded: (tagName: string) => void
 }) => {
@@ -33,5 +37,10 @@ export const MultiSelectInput = (props: {
 		}
 	}
 
-	return (<Input onKeyUp={e => inputOnKeyup(e)} type={'text'} placeholder={'Add Tag'}/>)
+	return (
+		<Wrapper>
+			<Input onKeyUp={e => inputOnKeyup(e)} type={'text'} placeholder={'Add Tag'}/>
+			<AutoCompleteList />
+		</Wrapper>
+)
 }

@@ -13,6 +13,7 @@ const Tag = styled.span`
   line-height: 2.1;
   font-size: 14px;
   font-weight: bold;
+  cursor: pointer;
   & > *:last-child {
     margin-left: 12px;
   }
@@ -28,8 +29,14 @@ const TagButton = (props: { children: string }) => {
 }
 
 const TagsWrapper = styled.div`
-  display: inline-block;
-  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  height: 47px;
+  margin-left: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-x: auto;
+  border-radius: 12px;
 `
 
 function renderTags(items: Array<string>) {

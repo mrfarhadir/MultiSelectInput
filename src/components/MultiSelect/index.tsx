@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import {useRef} from "react";
 import styled from "styled-components";
 import {MultiSelectInput} from "./Input";
-import { Tags } from "./Tags";
+import {Tags} from "./Tags";
 import {useState} from "react";
+import {AutoCompleteList} from "./AutoCompleteList";
 
 export const Wrapper = styled.div`
   background: var(--light);
@@ -11,16 +12,14 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   padding-left: 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  overflow-x: auto;
+  width: 80vw;
 `
 
 
 export const MultiSelect = () => {
 	const wrapper = useRef<HTMLDivElement>(null)
 	const [items, setItems] = useState<Array<string>>([])
-	
+
 	function scrollWrapperToEnd() {
 		if (wrapper.current) {
 			wrapper.current.scrollLeft = wrapper.current.scrollWidth
@@ -33,11 +32,10 @@ export const MultiSelect = () => {
 	}
 
 	return (
+
 		<Wrapper ref={wrapper}>
-			<div>
-				<Tags items={items} />
-				<MultiSelectInput newTagAdded={tagName => addNewTag(tagName)} />
-			</div>
+			<Tags items={items}/>
+			<MultiSelectInput newTagAdded={tagName => addNewTag(tagName)}/>
 		</Wrapper>
 	)
 }
