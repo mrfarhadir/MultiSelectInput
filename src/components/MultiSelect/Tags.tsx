@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import {CloseIcon} from "../icons/Close";
+import {useEffect, useRef} from "react";
+import {usePrevious} from "../../hooks/previous";
 
 const Tag = styled.span`
   display: inline-flex;
@@ -46,8 +48,24 @@ function renderTags(items: Array<string>) {
 export const Tags = (props: {
 	items: Array<string>
 }) => {
+	const previousItems = usePrevious(props.items)
+	const tagsRef = useRef<HTMLDivElement>(null)
+
+	function scrollTagsToEnd() {
+		if (tagsRef.current) {
+			tagsRef.current.scrollLeft = tagsRef.current.scrollWidth
+		}
+	}
+
+	useEffect(() => {
+		if (previousItems && previousItems.length < props.items.length) {
+			scrollTagsToEnd()
+		}
+	}, [props.items])
+
+
 	return (
-		<TagsWrapper>
+		<TagsWrapper ref={tagsRef}>
 			{renderTags(props.items)}
 		</TagsWrapper>
 	)
