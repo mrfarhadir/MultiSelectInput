@@ -28,7 +28,8 @@ const Input = styled.input`
 
 export const MultiSelectInput = (props: {
 	newTagAdded: (tagName: string) => void,
-	items: Array<string>
+	selectedItems: Array<string>,
+	items: Array<string>,
 }) => {
 	const [inputValue, setInputValue] = useState('')
 
@@ -49,7 +50,7 @@ export const MultiSelectInput = (props: {
 		<Wrapper>
 			<Input value={inputValue} onKeyUp={e => inputOnKeyup(e)} type={'text'} placeholder={'Add Tag'} onChange={e => setInputValue(e.currentTarget.value)}/>
 			{
-				inputValue ? <AutoCompleteList selectedItems={props.items} addItem={name => addItem(name)} items={props.items} search={inputValue} /> : ''
+				inputValue ? <AutoCompleteList selectedItems={props.selectedItems} addItem={name => addItem(name)} items={props.items} search={inputValue} /> : ''
 			}
 		</Wrapper>
 )

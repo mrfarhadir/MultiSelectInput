@@ -22,7 +22,8 @@ export const MultiSelect = (props: {
 	const [items, setItems] = useState<Array<string>>([])
 
 	function addNewTag(tagName: string) {
-		setItems([...items, tagName]);
+		if (items.findIndex(item => item === tagName) === -1)
+			setItems([...items, tagName]);
 	}
 
 	function removeTag(tagName: string) {
@@ -38,7 +39,7 @@ export const MultiSelect = (props: {
 
 		<Wrapper>
 			<Tags removeTag={(name) => removeTag(name)} items={items}/>
-			<MultiSelectInput items={props.items} newTagAdded={tagName => addNewTag(tagName)}/>
+			<MultiSelectInput selectedItems={items} items={props.items} newTagAdded={tagName => addNewTag(tagName)}/>
 		</Wrapper>
 	)
 }

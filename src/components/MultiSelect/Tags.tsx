@@ -62,6 +62,9 @@ export const Tags = (props: {
 	}
 
 	useEffect(() => {
+		/**
+		 * when there is new item, scroll tags element to the end, below if condition prevents scrolling to the end when an item get removed.
+		 */
 		if (previousItems && previousItems.length < props.items.length) {
 			scrollTagsToEnd()
 		}

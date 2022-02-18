@@ -37,8 +37,16 @@ export const AutoCompleteList = (props: {
 	search: string,
 	addItem: (name: string) => void
 }) => {
+
+	/**
+	 * First filter: search among items (astros.js, sample data) based on user input
+	 * Second filter: remove selected items from autocomplete list
+	 */
+
 	const filteredItems = props.items
 		.filter(item => item.toLowerCase().includes(props.search.toLowerCase()))
+		.filter(item => props.selectedItems.findIndex(selectedItem => selectedItem === item) === -1)
+
 
 	function renderListItems(items: Array<string>) {
 		return (
@@ -50,6 +58,9 @@ export const AutoCompleteList = (props: {
 		)
 	}
 
+	/**
+	 * when autocomplete list has less than 2 items, show <create {item}> to add new item
+	 */
 	function renderLastListItem(items: Array<string>, name: string) {
 		if (items.length <= 1)
 			return (
