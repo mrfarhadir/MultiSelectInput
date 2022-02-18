@@ -19,24 +19,25 @@ export const Wrapper = styled.div`
 export const MultiSelect = (props: {
 	items: Array<string>
 }) => {
-	const wrapper = useRef<HTMLDivElement>(null)
 	const [items, setItems] = useState<Array<string>>([])
-
-	function scrollWrapperToEnd() {
-		if (wrapper.current) {
-			wrapper.current.scrollLeft = wrapper.current.scrollWidth
-		}
-	}
 
 	function addNewTag(tagName: string) {
 		setItems([...items, tagName]);
-		scrollWrapperToEnd()
+	}
+
+	function removeTag(tagName: string) {
+		const indexToRemove = items.findIndex(item => item === tagName)
+		if (indexToRemove >= 0) {
+			const _items = Object.assign([], items)
+			_items.splice(indexToRemove, 1)
+			setItems(_items)
+		}
 	}
 
 	return (
 
-		<Wrapper ref={wrapper}>
-			<Tags items={items}/>
+		<Wrapper>
+			<Tags removeTag={(name) => removeTag(name)} items={items}/>
 			<MultiSelectInput items={props.items} newTagAdded={tagName => addNewTag(tagName)}/>
 		</Wrapper>
 	)

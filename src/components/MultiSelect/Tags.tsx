@@ -21,11 +21,14 @@ const Tag = styled.span`
   }
 `
 
-const TagButton = (props: { children: string }) => {
+const TagButton = (props: {
+	children: string,
+	RemoveTag: (name: string) => void
+}) => {
 	return (
 		<Tag>
 			{props.children}
-			<CloseIcon/>
+			<CloseIcon onClick={() => props.RemoveTag(props.children)} />
 		</Tag>
 	)
 }
@@ -41,12 +44,13 @@ const TagsWrapper = styled.div`
   border-radius: 12px;
 `
 
-function renderTags(items: Array<string>) {
-	return items.map((item, i) => <TagButton key={i}>{item}</TagButton>)
+function renderTags(items: Array<string>, removeTag: (name: string) => void) {
+	return items.map((item, i) => <TagButton RemoveTag={(name) => removeTag(name)} key={i}>{item}</TagButton>)
 }
 
 export const Tags = (props: {
-	items: Array<string>
+	items: Array<string>,
+	removeTag: (name: string) => void
 }) => {
 	const previousItems = usePrevious(props.items)
 	const tagsRef = useRef<HTMLDivElement>(null)
@@ -66,7 +70,7 @@ export const Tags = (props: {
 
 	return (
 		<TagsWrapper ref={tagsRef}>
-			{renderTags(props.items)}
+			{renderTags(props.items, props.removeTag)}
 		</TagsWrapper>
 	)
 }
