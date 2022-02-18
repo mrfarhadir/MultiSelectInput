@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css'
 import {MultiSelect} from "./components/MultiSelect";
+import {astros} from "./data/astros";
 function App() {
 	return (
 		<div className="App">
-			<MultiSelect />
+			<MultiSelect items={astros} />
 		</div>
 	);
 }

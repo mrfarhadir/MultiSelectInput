@@ -16,7 +16,9 @@ export const Wrapper = styled.div`
 `
 
 
-export const MultiSelect = () => {
+export const MultiSelect = (props: {
+	items: Array<string>
+}) => {
 	const wrapper = useRef<HTMLDivElement>(null)
 	const [items, setItems] = useState<Array<string>>([])
 
@@ -35,7 +37,7 @@ export const MultiSelect = () => {
 
 		<Wrapper ref={wrapper}>
 			<Tags items={items}/>
-			<MultiSelectInput newTagAdded={tagName => addNewTag(tagName)}/>
+			<MultiSelectInput items={props.items} newTagAdded={tagName => addNewTag(tagName)}/>
 		</Wrapper>
 	)
 }

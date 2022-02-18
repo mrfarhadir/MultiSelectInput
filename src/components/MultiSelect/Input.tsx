@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { AutoCompleteList } from "./AutoCompleteList";
+import {useState} from "react";
 
 const Wrapper = styled.div`
   position: relative;
@@ -26,21 +27,30 @@ const Input = styled.input`
 `
 
 export const MultiSelectInput = (props: {
-	newTagAdded: (tagName: string) => void
+	newTagAdded: (tagName: string) => void,
+	items: Array<string>
 }) => {
-
+	const [inputValue, setInputValue] = useState('')
 
 	function inputOnKeyup(e: React.KeyboardEvent<HTMLInputElement>) {
 		if (e.key === 'Enter') {
 			props.newTagAdded(e.currentTarget.value)
 			e.currentTarget.value = ''
 		}
+		setInputValue(e.currentTarget.value)
+	}
+
+	function addItem(name: string) {
+		props.newTagAdded(name)
+		setInputValue('')
 	}
 
 	return (
 		<Wrapper>
-			<Input onKeyUp={e => inputOnKeyup(e)} type={'text'} placeholder={'Add Tag'}/>
-			<AutoCompleteList />
+			<Input value={inputValue} onKeyUp={e => inputOnKeyup(e)} type={'text'} placeholder={'Add Tag'} onChange={e => setInputValue(e.currentTarget.value)}/>
+			{
+				inputValue ? <AutoCompleteList selectedItems={props.items} addItem={name => addItem(name)} items={props.items} search={inputValue} /> : ''
+			}
 		</Wrapper>
 )
 }
