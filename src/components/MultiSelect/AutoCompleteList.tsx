@@ -20,6 +20,7 @@ const ListItem = styled.li`
   padding: 12px 8px;
   transition: all 200ms ease;
   cursor: pointer;
+  word-break: break-all;
   &:hover {
     border-left: 4px solid var(--primary);
   }
